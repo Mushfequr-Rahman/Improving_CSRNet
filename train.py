@@ -15,7 +15,7 @@ from utils import denormalize
 if __name__=="__main__":
     
     cfg = Config()                                                          # configuration
-    continue_training = True
+    continue_training = False
     
     model = CSRNet().to(cfg.device) 
     
