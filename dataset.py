@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-import cv2
+#import cv2
 from torchvision import transforms
 import random
 from PIL import Image

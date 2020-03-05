@@ -20,8 +20,9 @@ if __name__=="__main__":
     model = CSRNet().to(cfg.device) 
     
     if continue_training:
-        model.load_state_dict(torch.load('checkpoints/35.pth') ) 
-                                                                             # model
+        model.load_state_dict(torch.load('checkpoints/35.pth') )                                        # GPU
+        # torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)  # CPU
+                                                                            # model
     criterion = nn.MSELoss(size_average=False)                              # objective
     optimizer = torch.optim.Adam(model.parameters(),lr=cfg.lr)              # optimizer
     train_dataloader = create_train_dataloader(cfg.dataset_root, use_flip=True, batch_size=cfg.batch_size)
@@ -29,7 +30,7 @@ if __name__=="__main__":
 
     min_mae = sys.maxsize
     min_mae_epoch = -1
-    for epoch in range(1, cfg.epochs):                          # start training
+    for epoch in range(1, cfg.epochs):                                      # start training
         model.train()
         epoch_loss = 0.0
         for i, data in enumerate(tqdm(train_dataloader)):
