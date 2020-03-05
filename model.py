@@ -4,6 +4,15 @@ import torch
 from torchvision import models
 import collections
 
+"""
+Modify the code to include for Grad cam 
+
+"""
+
+
+
+
+
 
 class CSRNet(nn.Module):
     def __init__(self, load_weights=False):
@@ -27,9 +36,16 @@ class CSRNet(nn.Module):
 
     def forward(self, x):
         x = self.frontend(x)
+        print("Before backend",x.shape)
         x = self.backend(x)
+        print("After backend", x.shape)
+
+
         x = self.output_layer(x)
+        print("After output layer: " ,x.shape)
+
         x = nn.functional.interpolate(x, scale_factor=8)
+        print('Final out', x.shape)
         return x
 
     def _initialize_weights(self):
@@ -63,12 +79,17 @@ def make_layers(cfg, in_channels=3, batch_norm=False, dilation=False):
     return nn.Sequential(*layers)
 
 
-# testing code
-# if __name__ == "__main__":
-#     csrnet = CSRNet()
-#     input_img = torch.ones((1, 3, 256, 256))
-#     out = csrnet(input_img)
-#     print(out.shape)
 
 
-# %%
+
+
+if __name__ == "__main__":
+    csrnet = CSRNet()
+    input_img = torch.ones((1, 3, 256, 256))
+    print("Input Image Shape: ", input_img.shape)
+    print("CSRnet", csrnet)
+    out = csrnet(input_img)
+    print(out.shape)
+
+
+
