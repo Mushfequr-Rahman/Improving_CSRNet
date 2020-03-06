@@ -1,2 +1,5 @@
-runs/
-checkpoints/
+data
+.ipynb_checkpoints
+__pycache__
+runs
+checkpoints
