@@ -16,7 +16,7 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
     model_param_path: the path of specific mcnn parameters.
     '''
     cfg= Config()
-    device=torch.device("cuda")
+    device= cfg.device #torch.device("cpu")
     model=CSRNet()
     model.load_state_dict(torch.load(model_param_path))
     model.to(device)
@@ -37,9 +37,9 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
             Changed how to access the data . 
             """
 
-            img= data['image'].to(cfg.device)
+            img= data['image'].to(device)
             #gt_dmap=gt_dmap.to(device)
-            gt_dmap = data['densitymap'].to(cfg.device)
+            gt_dmap = data['densitymap'].to(device)
             # forward propagation
             et_dmap=model(img)
             mae+=abs(et_dmap.data.sum()-gt_dmap.data.sum()).item()
@@ -58,7 +58,7 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     model_param_path: the path of specific mcnn parameters.
     index: the order of the test image in test dataset.
     '''
-    device=torch.device("cuda")
+    device=torch.device("cpu")
     model=CSRNet().to(device)
     model.load_state_dict(torch.load(model_param_path))
     cfg = Config()
@@ -66,9 +66,9 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     model.eval()
     for i,data in enumerate(dataloader):
         if i==index:
-            img = data['image'].to(cfg.device)
+            img = data['image'].to(device)
             # gt_dmap=gt_dmap.to(device)
-            gt_dmap = data['densitymap'].to(cfg.device)
+            gt_dmap = data['densitymap'].to(device)
             # forward propagation
             et_dmap=model(img).detach()
             et_dmap=et_dmap.squeeze(0).squeeze(0).cpu().numpy()
@@ -83,5 +83,5 @@ if __name__=="__main__":
     img_root='./data/part_A_final/test_data/images'
     gt_dmap_root='./data/part_A_final/test_data/ground_truth'
     model_param_path='./checkpoints/35.pth'
-    #cal_mae(img_root,gt_dmap_root,model_param_path)
+    cal_mae(img_root,gt_dmap_root,model_param_path)
     estimate_density_map(img_root,gt_dmap_root,model_param_path,3)
