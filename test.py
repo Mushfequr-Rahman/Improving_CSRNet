@@ -27,7 +27,7 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
     """
 
     dataloader = create_test_dataloader(cfg.dataset_root)
-    #dataloader=torch.utils.data.DataLoader(dataset,batch_size=1,shuffle=False)
+    #dataloader=torch.utils.data.DataLoader(cfg.dataset_root,batch_size=1,shuffle=False)
     model.eval()
     mae=0
     with torch.no_grad():
@@ -50,8 +50,7 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
 def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
 
-    @Mushy Hi Jess I made similar changes jere
-    You the best.
+    @Mushy
     Show one estimated density-map.
     img_root: the root of test image data.
     gt_dmap_root: the root of test ground truth density-map data.
@@ -60,7 +59,8 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
     device=torch.device("cpu")
     model=CSRNet().to(device)
-    model.load_state_dict(torch.load(model_param_path))
+    model.load_state_dict(torch.load(model_param_path))                                               # GPU
+    # torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
     cfg = Config()
     dataloader = create_test_dataloader(cfg.dataset_root)
     model.eval()
@@ -82,6 +82,6 @@ if __name__=="__main__":
     torch.backends.cudnn.enabled=False
     img_root='./data/part_A_final/test_data/images'
     gt_dmap_root='./data/part_A_final/test_data/ground_truth'
-    model_param_path='./checkpoints/35.pth'
+    model_param_path='./checkpoints/shaghai_tech_a_best.pth'
     cal_mae(img_root,gt_dmap_root,model_param_path)
     estimate_density_map(img_root,gt_dmap_root,model_param_path,3)
