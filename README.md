@@ -36,18 +36,42 @@ This is an simple and clean implemention of CVPR 2018 paper ["CSRNet: Dilated Co
 ## Testing
 1. Run `test.py` for calculate MAE of test images or just show an estimated density-map
 
-## CIFAR
-Dataset that is used for human classification, to train the data set run `python train_people.py`
-
 ## Gradcam
 Based on the following paper [Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization](https://arxiv.org/pdf/1610.02391.pdf)
 
 Functions implemented is under `gradcam.py` and the demo to attain following result can be found also under `gradcam_demo.ipynb`
 
 <p align="center">
-    <img width="700" height="300" src="./images/gradcam_result.png">
+    <img width="700" height="300" src="./images/gradcam_backprop.png">
+</p>
+
+## CIFAR
+Dataset that is used for human classification, to train the data set run `python train_people.py`
+
+<p align="center">
+    <img width="700" height="300" src="./images/people_classification.png">
+</p>
+
+## Our Modification
+<p align="center">
+    <img width="700" height="300" src="./images/modif.png">
+</p>
+
+## Learning Rate Warm up and Cosine Decay Results
+<p align="center">
+    <img width="700" height="300" src="./images/learning_decay.png">
+</p>
+
+## Result
+<p align="center">
+    <img width="700" height="300" src="./images/table_result.png">
+</p>
+
+<p align="center">
+    <img width="700" height="300" src="./images/csr+gradcam+modif.png">
 </p>
 
 ## Acknowlegedments
 1. [CSRnet-pytorch base implementation](https://github.com/CommissarMa/CSRNet-pytorch.git)
-2. [CIFAR Dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py)
+2. [GradCam-pytorch base implementation](https://github.com/jacobgil/pytorch-grad-cam)
+3. [CIFAR Dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py)
