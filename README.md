@@ -65,8 +65,8 @@ Dataset that is used for human classification, to train the data set run `python
 ## Result
 <table align="center">
     <tr>
-        <td><img width="460" height="300" src="./images/result_a.png"></td>
-        <td><img width="460" height="300" src="./images/result_b.png"></td>
+        <td><img width="460" height="200" src="./images/result_a.png"></td>
+        <td><img width="460" height="200" src="./images/result_b.png"></td>
     </tr>
 </table>
 
