@@ -45,7 +45,7 @@ Functions implemented is under `gradcam.py` and the demo to attain following res
 </p>
 
 ## CIFAR
-Dataset that is used for human classification, to train the data set run `python train_people.py`
+Dataset that is used for human classification, to train the data set run `python train_people.py` or open `Train_people.ipynb`
 
 <p align="center">
     <img width="700" height="300" src="./images/people_classification.png">

@@ -1,5 +1,4 @@
 conda create -n CSRNet python=3.6
-#eval "$(conda shell.bash hook)"
 conda activate CSRNet
 conda install numpy
 conda install -c conda-forge opencv

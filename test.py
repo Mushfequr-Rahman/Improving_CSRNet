@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as CM
 from tqdm import tqdm
 from config import Config
-
 from model import CSRNet
 from dataset import *
 
@@ -16,9 +15,10 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
     model_param_path: the path of specific mcnn parameters.
     '''
     cfg= Config()
-    device= cfg.device #torch.device("cpu")
+    device= cfg.device
     model=CSRNet()
-    model.load_state_dict(torch.load(model_param_path))
+    model.load_state_dict(torch.load(model_param_path))                             # GPU
+    #torch.load(model_param_path, map_location=lambda storage, loc: storage)        # CPU
     model.to(device)
     """
     @Mushy 
@@ -49,7 +49,6 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
 
 def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
-
     @Mushy
     Show one estimated density-map.
     img_root: the root of test image data.
@@ -59,8 +58,8 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
     device=torch.device("cpu")
     model=CSRNet().to(device)
-    model.load_state_dict(torch.load(model_param_path))                                               # GPU
-    # torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
+    #model.load_state_dict(torch.load(model_param_path))                                               # GPU
+    torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
     cfg = Config()
     dataloader = create_test_dataloader(cfg.dataset_root)
     model.eval()

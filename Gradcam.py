@@ -9,8 +9,10 @@ from model import *
 import matplotlib.pyplot as plt
 
 class FeatureExtractor():
-    """ Class for extracting activations and
-    registering gradients from targetted intermediate layers """
+    """ 
+    Class for extracting activations and
+    registering gradients from targetted intermediate layers 
+    """
 
     def __init__(self, model, target_layers):
         self.model = model
@@ -32,10 +34,12 @@ class FeatureExtractor():
 
 
 class ModelOutputs():
-    """ Class for making a forward pass, and getting:
+    """ 
+    Class for making a forward pass, and getting:
     1. The network output.
     2. Activations from intermeddiate targetted layers.
-    3. Gradients from intermeddiate targetted layers. """
+    3. Gradients from intermeddiate targetted layers. 
+    """
 
     def __init__(self, model, target_layers):
         self.model = model
@@ -68,7 +72,8 @@ def preprocess_image(img):
 
 
 def show_cam_on_image(img, mask):
-    heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLORMAP_JET)
+    #heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLORMAP_JET)
+    heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLOR_BGR2RGB)    # Convert BGR to RGB
     heatmap = np.float32(heatmap) / 255
     cam = heatmap + np.float32(img)
     cam = cam / np.max(cam)
@@ -151,13 +156,6 @@ class GuidedBackpropReLU(Function):
 
         return grad_input
 
-
-
-
-
-
-
-
 class GuidedBackpropReLUModel:
     def __init__(self, model, use_cuda):
         self.model = model
@@ -200,8 +198,6 @@ class GuidedBackpropReLUModel:
 
         return output
 
-
-
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--use-cuda', action='store_true', default=False,
@@ -228,21 +224,21 @@ def deprocess_image(img):
 
 
 if __name__ == '__main__':
-    """ python grad_cam.py <path_to_image>
+    """ 
+    python grad_cam.py <path_to_image>
     1. Loads an image with opencv.
     2. Preprocesses it for VGG19 and converts to a pytorch variable.
     3. Makes a forward pass to find the category index with the highest score,
     and computes intermediate activations.
-    Makes the visualization. """
+    Makes the visualization. 
+    """
 
     args = get_args()
-
     my_model = models.vgg16(pretrained=True)
+
     """
     Find a way to transfer the weigts from pth file to the model.
     """
-
-
 
     second_model = CSRNet()
     second_model.load_state_dict(torch.load('checkpoints/shaghai_tech_a_best.pth'))
@@ -252,8 +248,6 @@ if __name__ == '__main__':
     my_model.features.add_module("pool mod" , MaxPoolLayer)
     my_model.features.add_module("pool mod 2", MaxPoolLayer)
 
-
-    #print(second_model)
     print(my_model)
 
     grad_cam = GradCam(model=my_model,target_layer_names=["21"], use_cuda=args.use_cuda)

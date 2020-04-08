@@ -6,11 +6,16 @@ import torch.nn as nn
 import os
 import sys
 from tqdm import tqdm
-
 from config import Config
 from model import CSRNet
 from dataset import create_train_dataloader,create_test_dataloader
-from utils import denormalize
+
+def denormalize(tensor):
+    mean = [0.5, 0.5, 0.5]
+    std = [0.225,0.225,0.225]
+    for t, m, s in zip(tensor, mean, std):
+        t.mul_(s).add_(m)
+    return tensor
 
 if __name__=="__main__":
     
@@ -20,8 +25,8 @@ if __name__=="__main__":
     model = CSRNet().to(cfg.device) 
     
     if continue_training:
-        model.load_state_dict(torch.load('checkpoints/35.pth') )                                        # GPU
-        # torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)  # CPU
+        model.load_state_dict(torch.load('checkpoints/shaghai_tech_a_best.pth') )                                        # GPU
+        #torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)                   # CPU
                                                                             # model
     criterion = nn.MSELoss(size_average=False)                              # objective
     optimizer = torch.optim.Adam(model.parameters(),lr=cfg.lr)              # optimizer
@@ -36,12 +41,12 @@ if __name__=="__main__":
         for i, data in enumerate(tqdm(train_dataloader)):
             image = data['image'].to(cfg.device)
             gt_densitymap = data['densitymap'].to(cfg.device)
-            et_densitymap = model(image)                        # forward propagation
-            loss = criterion(et_densitymap,gt_densitymap)       # calculate loss
+            et_densitymap = model(image)                                    # forward propagation
+            loss = criterion(et_densitymap,gt_densitymap)                   # calculate loss
             epoch_loss += loss.item()
             optimizer.zero_grad()
-            loss.backward()                                     # back propagation
-            optimizer.step()                                    # update network parameters
+            loss.backward()                                                 # back propagation
+            optimizer.step()                                                # update network parameters
         cfg.writer.add_scalar('Train_Loss', epoch_loss/len(train_dataloader), epoch)
 
         model.eval()
@@ -50,13 +55,13 @@ if __name__=="__main__":
             for i, data in enumerate(tqdm(test_dataloader)):
                 image = data['image'].to(cfg.device)
                 gt_densitymap = data['densitymap'].to(cfg.device)
-                et_densitymap = model(image).detach()           # forward propagation
+                et_densitymap = model(image).detach()                                                           # forward propagation
                 mae = abs(et_densitymap.data.sum()-gt_densitymap.data.sum())
                 epoch_mae += mae.item()
             epoch_mae /= len(test_dataloader)
             if epoch_mae < min_mae:
                 min_mae, min_mae_epoch = epoch_mae, epoch
-                torch.save(model.state_dict(), os.path.join(cfg.checkpoints,str(epoch)+".pth"))     # save checkpoints
+                torch.save(model.state_dict(), os.path.join(cfg.checkpoints,str(epoch)+".pth"))                 # save checkpoints
             print('Epoch ', epoch, ' MAE: ', epoch_mae, ' Min MAE: ', min_mae, ' Min Epoch: ', min_mae_epoch)   # print information
             cfg.writer.add_scalar('Val_MAE', epoch_mae, epoch)
             cfg.writer.add_image(str(epoch)+'/Image', denormalize(image[0].cpu()))

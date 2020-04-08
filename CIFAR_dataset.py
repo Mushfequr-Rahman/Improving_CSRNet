@@ -3,6 +3,10 @@
 
 from __future__ import print_function
 from PIL import Image
+from torchvision import models, transforms
+import torch.utils.data as data
+from torchvision.datasets.utils import download_url, check_integrity
+from torch.utils.data import DataLoader,random_split
 import os
 import os.path
 import errno
@@ -12,13 +16,6 @@ if sys.version_info[0] == 2:
     import cPickle as pickle
 else:
     import pickle
-
-
-from torchvision import models, transforms
-
-import torch.utils.data as data
-from torchvision.datasets.utils import download_url, check_integrity
-from torch.utils.data import DataLoader,random_split
 
 
 

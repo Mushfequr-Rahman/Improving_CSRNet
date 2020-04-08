@@ -6,7 +6,6 @@ import collections
 
 """
 Modify the code to include for Grad cam 
-
 """
 
 class CSRNet(nn.Module):
@@ -34,7 +33,6 @@ class CSRNet(nn.Module):
         print("Before backend",x.shape)
         x = self.backend(x)
         print("After backend", x.shape)
-
 
         x = self.output_layer(x)
         print("After output layer: " ,x.shape)
@@ -72,11 +70,6 @@ def make_layers(cfg, in_channels=3, batch_norm=False, dilation=False):
                 layers += [conv2d, nn.ReLU(inplace=True)]
             in_channels = v
     return nn.Sequential(*layers)
-
-
-
-
-
 
 if __name__ == "__main__":
     csrnet = CSRNet()
