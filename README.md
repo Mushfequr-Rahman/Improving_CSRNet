@@ -54,12 +54,12 @@ Dataset that is used for human classification, to train the data set run `python
 
 ## Our Modification
 <p align="center">
-    <img width="700" height="300" src="./images/modif.png">
+    <img width="400" height="200" src="./images/modif.png">
 </p>
 
 ## Learning Rate Warm up and Cosine Decay Results
 <p align="center">
-    <img width="400" height="300" src="./images/learning_decay.png">
+    <img width="700" height="300" src="./images/learning_decay.png">
 </p>
 
 ## Result
