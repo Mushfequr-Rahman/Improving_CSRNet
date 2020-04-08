@@ -15,11 +15,10 @@ This is an simple and clean implemention of CVPR 2018 paper ["CSRNet: Dilated Co
 3. Do `cd Cv_final_project`, we will call this directory as ROOT
 
 ## Data Setup
-1. Download ShanghaiTech Dataset from
-[Dropbox](https://www.dropbox.com/s/fipgjqxl7uj8hd5/ShanghaiTech.zip?dl=0) or [Baidu Disk](https://pan.baidu.com/s/101mNo_Vz21IwDYnYTnLQpw) (code: a2v8)   
+1. Download ShanghaiTech Dataset from [this link](https://drive.google.com/drive/u/0/folders/1bEKPv2xvYiEISTsktg83_hvt81vgKyu2)
 2. Put ShanghaiTech Dataset in `ROOT/data`. 
 3. You can find two python scripts in `data_preparation` folder which are used to generate ground truth density-map for ShanghaiTech PartA and PartB respectively. (Mind that you need move the script to corresponding  sub dataset folder e.g. `ROOT/data/part_A_final` and run it)
-4. Make sure you have a folder called `ROOT/checkpoints` and place the **weights** under that folder (extension: .pth)
+4. Make sure you have a folder called `ROOT/checkpoints` and place the **weights** under that folder (extension: .pth), the weights can be found [here](https://drive.google.com/drive/u/0/folders/1l_TLNion0JgolwXfOlqcsNzI3iXLsVac)
 
 ## Train
 1. Modify the dataset root in `config.py`   
