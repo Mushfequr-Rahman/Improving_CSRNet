@@ -17,7 +17,7 @@ def cal_mae(img_root,gt_dmap_root,model_param_path):
     cfg= Config()
     device= cfg.device
     model=CSRNet()
-    model.load_state_dict(torch.load(model_param_path))                             # GPU
+    model.load_state_dict(torch.load(model_param_path))                           # GPU
     #torch.load(model_param_path, map_location=lambda storage, loc: storage)        # CPU
     model.to(device)
     """
@@ -58,8 +58,8 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
     device=torch.device("cpu")
     model=CSRNet().to(device)
-    model.load_state_dict(torch.load(model_param_path))                                               # GPU
-    #torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
+    model.load_state_dict(torch.load(model_param_path))                       # GPU
+    #torch.load(model_param_path, map_location=lambda storage, loc: storage)    # CPU
     cfg = Config()
     dataloader = create_test_dataloader(cfg.dataset_root)
     model.eval()
@@ -79,8 +79,15 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
 
 if __name__=="__main__":
     torch.backends.cudnn.enabled=False
+
     img_root='./data/part_A_final/test_data/images'
     gt_dmap_root='./data/part_A_final/test_data/ground_truth'
     model_param_path='./checkpoints/shaghai_tech_a_best.pth'
+    
+    """
+    img_root='./data/part_B_final/test_data/images'
+    gt_dmap_root='./data/part_B_final/test_data/ground_truth'
+    model_param_path='./checkpoints/Shanghai_Tech_B_1_best.pth'
+    """
     cal_mae(img_root,gt_dmap_root,model_param_path)
     estimate_density_map(img_root,gt_dmap_root,model_param_path,3)
