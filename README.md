@@ -1,5 +1,8 @@
 # CSRNet-Simple-Pytorch
-This is an simple and clean implemention of CVPR 2018 paper ["CSRNet: Dilated Convolutional Neural Networks for Understanding the Highly Congested Scenes"](https://arxiv.org/abs/1802.10062).  
+This is an simple and clean implemention of CVPR 2018 paper ["CSRNet: Dilated Convolutional Neural Networks for Understanding the Highly Congested Scenes"](https://arxiv.org/abs/1802.10062) for our project for CSCI 4240U Computer Vision. We have added files for several modifications on top of the authors contributions. 
+
+Authors:
+Mohammad Mushfequr Rahman and Jessica 
 
 <p align="center">
   <img width="750" height="400" src="./images/CSRNet_arch.png">
@@ -33,7 +36,7 @@ This is an simple and clean implemention of CVPR 2018 paper ["CSRNet: Dilated Co
 </table>
 
 ## Testing
-1. Run `test.py` for calculate MAE of test images or just show an estimated density-map
+1. Run `test.py` to calculate MAE of test images or just show an estimated density-map
 
 ## Gradcam
 Based on the following paper [Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization](https://arxiv.org/pdf/1610.02391.pdf)
@@ -77,3 +80,4 @@ Dataset that is used for human classification, to train the data set run `python
 1. [CSRnet-pytorch base implementation](https://github.com/CommissarMa/CSRNet-pytorch.git)
 2. [GradCam-pytorch base implementation](https://github.com/jacobgil/pytorch-grad-cam)
 3. [CIFAR Dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py)
+4. [Pytorch Learning Rate Warmup library](https://github.com/ildoonet/pytorch-gradual-warmup-lr)

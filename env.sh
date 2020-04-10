@@ -8,3 +8,4 @@ conda install pillow=6.1
 conda install -c conda-forge tensorboardx
 conda install tqdm
 conda install matplotlib
+pip install git+https://github.com/ildoonet/pytorch-gradual-warmup-lr.git
