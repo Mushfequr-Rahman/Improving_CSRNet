@@ -13,7 +13,7 @@ Mohammad Mushfequr Rahman and Jessica
 1. Run `./env.sh` to make sure all of the dependencies are installed (**conda** command can be replaced by **pip**)
 2. Clone this repository  
     ```
-    git clone https://github.com/Mushfequr-Rahman/Cv_final_project
+    git clone https://github.com/Mushfequr-Rahman/Improving_CSRNet
     ```
 3. Do `cd Cv_final_project`, we will call this directory as ROOT
 
@@ -76,8 +76,12 @@ Dataset that is used for human classification, to train the data set run `python
     <img width="700" height="300" src="./images/csr+gradcam+modif.png">
 </p>
 
+## Further Research
+1. [Residual Regression](http://visal.cs.cityu.edu.hk/static/pubs/conf/cvpr19-rescount.pdf) approach can be applied to improve our modification which we also compared to our result
+2. [SANet](http://openaccess.thecvf.com/content_ECCV_2018/papers/Xinkun_Cao_Scale_Aggregation_Network_ECCV_2018_paper.pdf) is another network that is more stable and does better cross-datasets
+
 ## Acknowlegedments
 1. [CSRnet-pytorch base implementation](https://github.com/CommissarMa/CSRNet-pytorch.git)
 2. [GradCam-pytorch base implementation](https://github.com/jacobgil/pytorch-grad-cam)
-3. [CIFAR Dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py)
+3. [CIFAR Dataset base](https://github.com/pytorch/vision/blob/master/torchvision/datasets/cifar.py)
 4. [Pytorch Learning Rate Warmup library](https://github.com/ildoonet/pytorch-gradual-warmup-lr)

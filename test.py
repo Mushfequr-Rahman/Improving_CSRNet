@@ -58,8 +58,8 @@ def estimate_density_map(img_root,gt_dmap_root,model_param_path,index):
     '''
     device=torch.device("cpu")
     model=CSRNet().to(device)
-    #model.load_state_dict(torch.load(model_param_path))                                               # GPU
-    torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
+    model.load_state_dict(torch.load(model_param_path))                                               # GPU
+    #torch.load('checkpoints/shaghai_tech_a_best.pth', map_location=lambda storage, loc: storage)    # CPU
     cfg = Config()
     dataloader = create_test_dataloader(cfg.dataset_root)
     model.eval()
